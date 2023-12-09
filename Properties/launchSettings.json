@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "ggeco_api": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7031",
+      "launchBrowser": false
+    }
+  }
+}
