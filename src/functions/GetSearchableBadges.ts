@@ -19,7 +19,7 @@ export async function GetSearchableBadges(request: HttpRequest, context: Invocat
 };
 
 app.http('GetSearchableBadges', {
-    methods: ['GET', 'POST'],
-    authLevel: 'anonymous',
+    methods: ['GET'],
+    authLevel: 'function',
     handler: GetSearchableBadges
 });
