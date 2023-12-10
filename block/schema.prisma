@@ -153,6 +153,6 @@ model Users {
   gender      Int?      @db.TinyInt
   create_at   DateTime
   last_signin DateTime
-  badge       String    @default(dbgenerated("cd0cdf99-d0cf-42b9-b7f9-967592f5332d"), map: "DEFAULT_Users_badge") @db.UniqueIdentifier
+  badge       String    @default(dbgenerated("fe944c71-d888-49ff-abf1-0cf819411ceb"), map: "DEFAULT_Users_badge") @db.UniqueIdentifier
   removed_at  DateTime?
 }
