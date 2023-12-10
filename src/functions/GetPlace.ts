@@ -1,5 +1,5 @@
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
-import { get_place_info } from "../maps/client";
+import { getPlaceInfo } from "../maps/client";
 import { PrismaClient } from "@prisma/client";
 
 export async function GetPlace(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
@@ -24,7 +24,7 @@ export async function GetPlace(request: HttpRequest, context: InvocationContext)
         context.info("Failed to get place from cache: " + e);
     }
 
-    const resp = await get_place_info(id);
+    const resp = await getPlaceInfo(id);
 
     await db.places.create({
         data: {
