@@ -1,0 +1,158 @@
+datasource db {
+  provider = "sqlserver"
+  url      = env("SQL_SERVER_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model BadgeRank {
+  user_id      String    @id(map: "PK_BadgeRank") @db.UniqueIdentifier
+  current_rank BigInt
+  prev_rank    BigInt?
+  update_at    DateTime?
+}
+
+model Badges {
+  id             String @id(map: "PK_Bages") @default(dbgenerated("newid()"), map: "DEFAULT_Bages_id") @db.UniqueIdentifier
+  name           String @db.NVarChar(Max)
+  summary        String @db.NVarChar(Max)
+  active_image   String @db.VarChar(Max)
+  inactive_image String @db.VarChar(Max)
+  selected_image String @db.VarChar(Max)
+  searchable     Int    @default(0, map: "DEFAULT_Badges_searchable") @db.TinyInt
+}
+
+model CourseBadges {
+  id        String @id(map: "PK_CourseKeywords") @default(dbgenerated("newid()"), map: "DEFAULT_CourseKeywords_id") @db.UniqueIdentifier
+  course_id String @db.UniqueIdentifier
+  badge_id  String @db.UniqueIdentifier
+
+  @@index([course_id], map: "Index_course_id")
+  @@index([badge_id], map: "Index_keyword")
+}
+
+model CoursePlaces {
+  id        String @id(map: "PK_CoursePlaces") @default(dbgenerated("newid()"), map: "DEFAULT_CoursePlaces_id") @db.UniqueIdentifier
+  course_id String @db.UniqueIdentifier
+  place_id  String @db.VarChar(4000)
+  order     Int
+
+  @@index([course_id], map: "Index_course_id")
+  @@index([place_id], map: "Index_place_id")
+}
+
+model Courses {
+  id        String   @id(map: "PK_Cources") @default(dbgenerated("newid()"), map: "DEFAULT_Cources_id") @db.UniqueIdentifier
+  author_id String   @db.UniqueIdentifier
+  name      String   @db.NChar(40)
+  reg_date  DateTime
+  review    String   @db.NVarChar(Max)
+  is_public Int      @default(1, map: "DEFAULT_Courses_is_public") @db.TinyInt
+
+  @@index([author_id], map: "index_author")
+  @@index([author_id, reg_date(sort: Desc)], map: "Index_author_date")
+}
+
+model EarnedBadges {
+  id        String   @id(map: "PK_EarnedBadges") @default(dbgenerated("newid()"), map: "DEFAULT_EarnedBadges_id") @db.UniqueIdentifier
+  user_id   String   @db.UniqueIdentifier
+  badge_id  String   @db.UniqueIdentifier
+  earned_at DateTime
+
+  @@index([badge_id], map: "Index_badge_id")
+  @@index([user_id], map: "index_user_id")
+}
+
+model FavoriteCourses {
+  id            String    @id(map: "PK_FavoriteCourses") @default(dbgenerated("newid()"), map: "DEFAULT_FavoriteCourses_id") @db.UniqueIdentifier
+  user_id       String    @db.UniqueIdentifier
+  course_id     String    @db.UniqueIdentifier
+  registered_at DateTime?
+
+  @@index([course_id], map: "Index_course_id")
+  @@index([user_id], map: "index_user_id")
+}
+
+model FavoritePlaces {
+  id            String    @id(map: "PK_FavoritePlaces") @default(dbgenerated("newid()"), map: "DEFAULT_FavoritePlaces_id") @db.UniqueIdentifier
+  user_id       String    @db.UniqueIdentifier
+  place_id      String    @db.VarChar(4000)
+  registered_at DateTime?
+
+  @@index([place_id], map: "Index_place_id")
+  @@index([user_id], map: "index_user_id")
+}
+
+model KakaoUsers {
+  user_id  String @id(map: "PK_KakaoUsers") @db.UniqueIdentifier
+  kakao_id BigInt
+  info     String @db.NText
+
+  @@index([kakao_id], map: "index_kakao_id")
+}
+
+model NaverUsers {
+  user_id  String @id(map: "PK_NaverUsers") @db.UniqueIdentifier
+  naver_id String @db.Char(128)
+  info     String @db.NText
+
+  @@index([naver_id], map: "index_naver_id")
+}
+
+model PlaceReviewPictures {
+  id            String  @id(map: "PK_PlaceReviewPictures") @default(dbgenerated("newid()"), map: "DEFAULT_PlaceReviewPictures_id") @db.UniqueIdentifier
+  review_id     String  @db.UniqueIdentifier
+  order         Int
+  picture_url   String  @db.VarChar(Max)
+  thumbnail_url String? @db.VarChar(Max)
+}
+
+model PlaceReviews {
+  id        String @id(map: "PK_PlaceReviews") @default(dbgenerated("newid()"), map: "DEFAULT_PlaceReviews_id") @db.UniqueIdentifier
+  place_id  String @db.VarChar(4000)
+  course_id String @db.UniqueIdentifier
+  author_id String @db.UniqueIdentifier
+  latitude  Float
+  longitude Float
+  review    String @db.NVarChar(Max)
+  order     Int
+
+  @@index([author_id], map: "Index_author_id")
+  @@index([course_id], map: "Index_course_id")
+}
+
+model Places {
+  id          String    @id(map: "PK_Places") @db.VarChar(4000)
+  data        String?   @db.NVarChar(Max)
+  last_update DateTime?
+}
+
+model PlaceTypeToBadgeId {
+  id         String @id(map: "PK_PlaceTypeToBadgeId") @default(dbgenerated("newid()"), map: "DEFAULT_PlaceTypeToBadgeId_id") @db.UniqueIdentifier
+  place_type String @db.NVarChar(64)
+  badge_id   String @db.UniqueIdentifier
+
+  @@index([place_type], map: "PlaceType_index")
+}
+
+model UserPlaceVisitCount {
+  id         String @id(map: "PK_NewTable") @default(dbgenerated("newid()"), map: "DEFAULT_UserPlaceVisitCount_id") @db.UniqueIdentifier
+  user_id    String @db.UniqueIdentifier
+  place_type String @db.NVarChar(60)
+  count      BigInt
+
+  @@index([user_id, place_type], map: "search")
+}
+
+model Users {
+  id          String    @id(map: "PK_Users") @default(dbgenerated("newid()"), map: "DEFAULT_Users_id") @db.UniqueIdentifier
+  nickname    String    @db.NChar(18)
+  age         Int?      @db.TinyInt
+  gender      Int?      @db.TinyInt
+  create_at   DateTime
+  last_signin DateTime
+  badge       String    @default(dbgenerated("cd0cdf99-d0cf-42b9-b7f9-967592f5332d"), map: "DEFAULT_Users_badge") @db.UniqueIdentifier
+  removed_at  DateTime?
+}
