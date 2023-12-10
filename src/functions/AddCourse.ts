@@ -6,7 +6,7 @@ import { addCourseData } from "../course/detail";
 class AddCourseRequest {
     course: Courses;
     reviews: PlaceReviews[];
-    reviewPhotos: PlaceReviewPictures[][];
+    review_photos: PlaceReviewPictures[][];
 }
 
 export async function AddCourse(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
@@ -43,7 +43,7 @@ export async function AddCourse(request: HttpRequest, context: InvocationContext
         data: req.course,
     });
 
-    await addCourseData(course, req.reviews, req.reviewPhotos, token, db);
+    await addCourseData(course, req.reviews, req.review_photos, token, db);
 
     return { status: 200 };
 };
