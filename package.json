@@ -15,7 +15,8 @@
     "@azure/functions": "^4.0.0",
     "@googlemaps/google-maps-services-js": "^3.3.41",
     "@prisma/client": "^5.7.0",
-    "@types/jsonwebtoken": "^9.0.5"
+    "@types/jsonwebtoken": "^9.0.5",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@types/node": "^18.19.3",
