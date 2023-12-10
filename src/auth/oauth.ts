@@ -7,7 +7,7 @@ export class KakaoUserInfo {
     public app_id: number;
 }
 
-export async function get_kakao_user_info(token: string): Promise<KakaoUserInfo> {
+export async function getKakaoUserInfo(token: string): Promise<KakaoUserInfo> {
     const resp = await fetch(kakao_url, {
         headers: {
             "Authorization": `Bearer ${token}`,
@@ -41,7 +41,7 @@ export class NaverUserInfo {
     };
 }
 
-export async function get_naver_user_info(token: string): Promise<NaverUserInfo> {
+export async function getNaverUserInfo(token: string): Promise<NaverUserInfo> {
     const resp = await fetch(naver_url, {
         headers: {
             "Authorization": `Bearer ${token}`,

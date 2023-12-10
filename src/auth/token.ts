@@ -1,9 +1,13 @@
 import jwt = require("jsonwebtoken");
+import { Headers } from "undici";
 
 const secret_key = Buffer.from(process.env["JWT_SECRET_KEY"], "base64").toString("binary");
 
 const access_token_lifetime = "7 days";
 const refresh_token_lifetime = "6 months";
+
+const authorization_header_key = "Authorization";
+const authorization_header_prefix = "Bearer ";
 
 enum TokenType {
     ACCESS_TOKEN,
@@ -39,4 +43,23 @@ export function verifyRefreshToken(token: string): Payload {
         throw new Error("Invalid token type");
     }
     return payload;
+}
+
+export function getTokenFromHeader(header: Headers): string {
+    const auth_header = header.get(authorization_header_key);
+    if (!auth_header) {
+        throw new Error("Authorization header not found");
+    }
+    if (!auth_header.startsWith(authorization_header_prefix)) {
+        throw new Error("Invalid authorization header");
+    }
+    return auth_header.substring(authorization_header_prefix.length);
+}
+
+export function getAndVerifyAccessToken(header: Headers): Payload {
+    return verifyAccessToken(getTokenFromHeader(header));
+}
+
+export function getAndVerifyRefreshToken(header: Headers): Payload {
+    return verifyRefreshToken(getTokenFromHeader(header));
 }
