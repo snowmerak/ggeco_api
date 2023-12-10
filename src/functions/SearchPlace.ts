@@ -1,10 +1,10 @@
 import { app, HttpRequest, HttpResponseInit, InvocationContext } from "@azure/functions";
-import { search_places_by_query } from "../maps/client";
+import { searchPlacesByQuery } from "../maps/client";
 
 export async function SearchPlace(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
     const name = request.query.get('query') || '카페';
 
-    const resp = await search_places_by_query(name)
+    const resp = await searchPlacesByQuery(name)
 
     const result = {
         places: resp,

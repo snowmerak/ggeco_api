@@ -9,7 +9,7 @@ interface PlaceInfo extends Place {
     place_types: string[];
 }
 
-export async function search_places_by_query(query: string): Promise<Place[]> {
+export async function searchPlacesByQuery(query: string): Promise<Place[]> {
     let resp = await client.textSearch({
         params: {
             query: query,
@@ -26,7 +26,7 @@ export async function search_places_by_query(query: string): Promise<Place[]> {
     return resp.data.results;
 }
 
-export async function get_place_info(id: string): Promise<Partial<PlaceData>> {
+export async function getPlaceInfo(id: string): Promise<Partial<PlaceData>> {
     let resp = await client.placeDetails({
         params: {
             place_id: id,
