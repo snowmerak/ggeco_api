@@ -1,0 +1,409 @@
+{
+  openapi: '3.0.0',
+  info: {
+    title: 'ggeco-api',
+    version: '1.0.0',
+  },
+  servers: [
+    {
+      url: 'https://ggeco-api.azurewebsites.net/api',
+    },
+  ],
+  paths: {
+    '/AddCourse': {
+      post: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Add a new course',
+        operationId: 'AddCourse',
+        requestBody: {
+          content: {
+            'application/json': {
+              schema: {
+                $ref: '#/components/schemas/AddCourseRequest',
+              },
+            },
+          },
+        },
+        responses: {
+          '200': {
+            description: 'Course added successfully',
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+        },
+      },
+    },
+    '/AddFavoriteCourse': {
+      post: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Add a new favorite course',
+        operationId: 'AddFavoriteCourse',
+        parameters: [
+          {
+            name: 'course_id',
+            in: 'query',
+            description: 'Course ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Course added successfully',
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+        },
+      },
+    },
+    '/AddFavoritePlace': {
+      post: {
+        tags: [
+          'Place',
+        ],
+        summary: 'Add a new favorite place',
+        operationId: 'AddFavoritePlace',
+        parameters: [
+          {
+            name: 'place_id',
+            in: 'query',
+            description: 'Place ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Place added successfully',
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+        },
+      },
+    },
+    '/GetBadge': {
+      get: {
+        tags: [
+          'Badge',
+        ],
+        summary: 'Get badge',
+        operationId: 'GetBadge',
+        parameters: [
+          {
+            name: 'badge_id',
+            in: 'query',
+            description: 'Badge ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Badge retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Badge',
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    '/GetBadges': {
+      get: {
+        tags: [
+          'Badge',
+        ],
+        summary: 'Get badges',
+        operationId: 'GetBadges',
+        responses: {
+          '200': {
+            description: 'Badges retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    $ref: '#/components/schemas/Badge',
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    '/GetEarnedBadge': {
+      get: {
+        tags: [
+          'Badge',
+        ],
+        summary: 'Get earned badge',
+        operationId: 'GetEarnedBadge',
+        parameters: [
+          {
+            name: 'badge_id',
+            in: 'query',
+            description: 'Badge ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Earned badge retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/EarnedBadge',
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+        },
+      },
+    },
+    '/GetEarnedBadges': {
+      get: {
+        tags: [
+          'Badge',
+        ],
+        summary: 'Get earned badges',
+        operationId: 'GetEarnedBadges',
+        responses: {
+          '200': {
+            description: 'Earned badges retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    $ref: '#/components/schemas/EarnedBadge',
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+        },
+      },
+    },
+  },
+  components: {
+    headers: {
+      Authorization: {
+        description: 'JWT token',
+        schema: {
+          type: 'string',
+        },
+      },
+    },
+    schemas: {
+      Course: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+          author_id: {
+            type: 'string',
+          },
+          name: {
+            type: 'string',
+          },
+          reg_date: {
+            type: 'string',
+            format: 'date-time',
+          },
+          review: {
+            type: 'string',
+          },
+          is_public: {
+            type: 'number',
+            format: 'int8',
+          },
+        },
+      },
+      PlaceReview: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+          place_id: {
+            type: 'string',
+          },
+          course_id: {
+            type: 'string',
+          },
+          author_id: {
+            type: 'string',
+          },
+          latitude: {
+            type: 'number',
+            format: 'double',
+          },
+          longitude: {
+            type: 'number',
+            format: 'double',
+          },
+          review: {
+            type: 'string',
+          },
+          order: {
+            type: 'number',
+            format: 'int8',
+          },
+        },
+      },
+      PlaceReviews: {
+        type: 'array',
+        items: {
+          $ref: '#/components/schemas/PlaceReview',
+        },
+      },
+      PlaceReviewPicture: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+          review_id: {
+            type: 'string',
+          },
+          order: {
+            type: 'number',
+            format: 'int8',
+          },
+          picture_url: {
+            type: 'string',
+          },
+          thumbnail_url: {
+            type: 'string',
+          },
+        },
+      },
+      PlaceReviewPictures: {
+        type: 'array',
+        items: {
+          $ref: '#/components/schemas/PlaceReviewPicture',
+        },
+      },
+      AddCourseRequest: {
+        type: 'object',
+        properties: {
+          course: {
+            $ref: '#/components/schemas/Course',
+          },
+          reviews: {
+            $ref: '#/components/schemas/PlaceReviews',
+          },
+          review_photos: {
+            type: 'array',
+            items: {
+              $ref: '#/components/schemas/PlaceReviewPictures',
+            },
+          },
+        },
+      },
+      Badge: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+          name: {
+            type: 'string',
+          },
+          summary: {
+            type: 'string',
+          },
+          active_image: {
+            type: 'string',
+          },
+          inactive_image: {
+            type: 'string',
+          },
+          selected_image: {
+            type: 'string',
+          },
+          searchable: {
+            type: 'number',
+            format: 'int8',
+          },
+        },
+      },
+      EarnedBadge: {
+        type: 'object',
+        properties: {
+          is_earned: {
+            type: 'boolean',
+          },
+          badge_id: {
+            type: 'string',
+          },
+          name: {
+            type: 'string',
+          },
+          summary: {
+            type: 'string',
+          },
+          image: {
+            type: 'string',
+          },
+          earned_at: {
+            type: 'string',
+            format: 'date-time',
+          },
+          earned_rate: {
+            type: 'number',
+            format: 'double',
+          },
+        },
+      },
+    },
+  },
+}
