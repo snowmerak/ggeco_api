@@ -38,7 +38,7 @@ export async function RemoveCourse(request: HttpRequest, context: InvocationCont
 
     if (!course) {
         return {
-            status: 400,
+            status: 404,
             body: JSON.stringify({
                 error: 'course not found'
             })
