@@ -231,6 +231,794 @@
         },
       },
     },
+    '/GetFavoriteCourses': {
+      get: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Get favorite courses',
+        operationId: 'GetFavoriteCourses',
+        responses: {
+          '200': {
+            description: 'Favorite courses retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    $ref: '#/components/schemas/Course',
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+          '404': {
+            description: 'Not found',
+          },
+        },
+      },
+    },
+    '/GetFavoritePlaces': {
+      get: {
+        tags: [
+          'Place',
+        ],
+        summary: 'Get favorite places',
+        operationId: 'GetFavoritePlaces',
+        responses: {
+          '200': {
+            description: 'Favorite places retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    $ref: '#/components/schemas/Place',
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+          '404': {
+            description: 'Not found',
+          },
+        },
+      },
+    },
+    '/GetMyCourses': {
+      get: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Get my courses',
+        operationId: 'GetMyCourses',
+        responses: {
+          '200': {
+            description: 'My courses retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    $ref: '#/components/schemas/Course',
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+        },
+      },
+    },
+    '/GetMyProfile': {
+      get: {
+        tags: [
+          'Profile',
+        ],
+        summary: 'Get my profile',
+        operationId: 'GetMyProfile',
+        responses: {
+          '200': {
+            description: 'My profile retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Profile',
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/GetMyRank": {
+      get: {
+        tags: [
+          'Ranking',
+        ],
+        summary: 'Get my rank',
+        operationId: 'GetMyRank',
+        responses: {
+          '200': {
+            description: 'My rank retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Ranking',
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+        },
+      },
+    },
+    "/GetPlace": {
+      get: {
+        tags: [
+          'Place',
+        ],
+        summary: 'Get place',
+        operationId: 'GetPlace',
+        parameters: [
+          {
+            name: 'place_id',
+            in: 'query',
+            description: 'Place ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Place retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Place',
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/GetPopularCourseOfBadge": {
+      get: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Get popular course of badge',
+        operationId: 'GetPopularCourseOfBadge',
+        parameters: [
+          {
+            name: 'badge_id',
+            in: 'query',
+            description: 'Badge ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+          {
+            name: 'count',
+            in: 'query',
+            description: 'Count',
+            required: true,
+            schema: {
+              type: 'number',
+              format: 'int32',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Popular course of badge retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Course',
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/GetRecentCourses": {
+      get: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Get recent courses',
+        operationId: 'GetRecentCourses',
+        parameters: [
+          {
+            name: 'count',
+            in: 'query',
+            description: 'Count',
+            required: true,
+            schema: {
+              type: 'number',
+              format: 'int32',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Recent courses retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    $ref: '#/components/schemas/Course',
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/GetSearchableBadges": {
+      get: {
+        tags: [
+          'Badge',
+        ],
+        summary: 'Get searchable badges',
+        operationId: 'GetSearchableBadges',
+        responses: {
+          '200': {
+            description: 'Searchable badges retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    $ref: '#/components/schemas/Badge',
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/IsFavoritePlace": {
+      get: {
+        tags: [
+          'Place',
+        ],
+        summary: 'Is favorite place',
+        operationId: 'IsFavoritePlace',
+        parameters: [
+          {
+            name: 'place_id',
+            in: 'query',
+            description: 'Place ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Favorite place retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    is_favorite: {
+                      type: 'boolean',
+                    },
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/IsFavoriteCourse": {
+      get: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Is favorite course',
+        operationId: 'IsFavoriteCourse',
+        parameters: [
+          {
+            name: 'course_id',
+            in: 'query',
+            description: 'Course ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Favorite course retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    is_favorite: {
+                      type: 'boolean',
+                    },
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/RefreshToken": {
+      post: {
+        tags: [
+          'Auth',
+        ],
+        summary: 'Refresh token',
+        operationId: 'RefreshToken',
+        responses: {
+          '200': {
+            description: 'Token refreshed successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    access_token: {
+                      type: 'string',
+                    },
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/RemoveCourse": {
+      delete: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Remove a course',
+        operationId: 'RemoveCourse',
+        parameters: [
+          {
+            name: 'course_id',
+            in: 'query',
+            description: 'Course ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Course removed successfully',
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+        },
+      },
+    },
+    "/RemoveFavoriteCourse": {
+      delete: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Remove a favorite course',
+        operationId: 'RemoveFavoriteCourse',
+        parameters: [
+          {
+            name: 'course_id',
+            in: 'query',
+            description: 'Course ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Course removed successfully',
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+        },
+      },
+    },
+    "/RemoveFavoritePlace": {
+      delete: {
+        tags: [
+          'Place',
+        ],
+        summary: 'Remove a favorite place',
+        operationId: 'RemoveFavoritePlace',
+        parameters: [
+          {
+            name: 'place_id',
+            in: 'query',
+            description: 'Place ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Place removed successfully',
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+        },
+      },
+    },
+    "/SearchCourseByPlace": {
+      get: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Search course by place',
+        operationId: 'SearchCourseByPlace',
+        parameters: [
+          {
+            name: 'place_id',
+            in: 'query',
+            description: 'Place ID',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+          {
+            name: 'count',
+            in: 'query',
+            description: 'Count',
+            required: true,
+            schema: {
+              type: 'number',
+              format: 'int32',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Course retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  $ref: '#/components/schemas/Course',
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/SearchCourseByQuery": {
+      get: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Search course by query',
+        operationId: 'SearchCourseByQuery',
+        parameters: [
+          {
+            name: 'query',
+            in: 'query',
+            description: 'Query',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+          {
+            name: 'count',
+            in: 'query',
+            description: 'Count',
+            required: true,
+            schema: {
+              type: 'number',
+              format: 'int32',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Course retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    $ref: '#/components/schemas/Course',
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/SearchPlace": {
+      get: {
+        tags: [
+          'Place',
+        ],
+        summary: 'Search place',
+        operationId: 'SearchPlace',
+        parameters: [
+          {
+            name: 'query',
+            in: 'query',
+            description: 'Query',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+          },
+        ],
+        responses: {
+          '200': {
+            description: 'Place retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  $ref: '#/components/schemas/Place',
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/Signin": {
+      post: {
+        tags: [
+          'Auth',
+        ],
+        summary: 'Signin',
+        operationId: 'Signin',
+        requestBody: {
+          content: {
+            'application/json': {
+              schema: {
+                $ref: '#/components/schemas/SigninRequest',
+              },
+            },
+          },
+        },
+        responses: {
+          '200': {
+            description: 'Signin successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    access_token: {
+                      type: 'string',
+                    },
+                    refresh_token: {
+                      type: 'string',
+                    },
+                  },
+                },
+              },
+            },
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/Signout": {
+      delete: {
+        tags: [
+          'Auth',
+        ],
+        summary: 'Signout',
+        operationId: 'Signout',
+        responses: {
+          '200': {
+            description: 'Signout successfully',
+          },
+          '401': {
+            description: 'Invalid input',
+          },
+        },
+      },
+    },
+    "/UpdateCourse": {
+      put: {
+        tags: [
+          'Course',
+        ],
+        summary: 'Update a course',
+        operationId: 'UpdateCourse',
+        requestBody: {
+          content: {
+            'application/json': {
+              schema: {
+                $ref: '#/components/schemas/AddCourseRequest',
+              },
+            },
+          },
+        },
+        responses: {
+          '200': {
+            description: 'Course updated successfully',
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+          '404': {
+            description: 'Not found',
+          },
+        },
+      },
+    },
+    "/UpdateMyBadge": {
+      patch: {
+        tags: [
+          'Badge',
+        ],
+        summary: 'Update my badge',
+        operationId: 'UpdateMyBadge',
+        requestBody: {
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  badge_id: {
+                    type: 'string',
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          '200': {
+            description: 'My badge updated successfully',
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+          '404': {
+            description: 'Not found',
+          },
+        },
+      },
+    },
+    "/UpdateMyNickname": {
+      patch: {
+        tags: [
+          'Profile',
+        ],
+        summary: 'Update my nickname',
+        operationId: 'UpdateMyNickname',
+        requestBody: {
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  nickname: {
+                    type: 'string',
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          '200': {
+            description: 'My nickname updated successfully',
+          },
+          '400': {
+            description: 'Invalid input',
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+          '404': {
+            description: 'Not found',
+          },
+        },
+      },
+    },
   },
   components: {
     headers: {
@@ -267,7 +1055,7 @@
           },
         },
       },
-      PlaceReview: {
+      CoursePlaceReview: {
         type: 'object',
         properties: {
           id: {
@@ -299,13 +1087,13 @@
           },
         },
       },
-      PlaceReviews: {
+      CoursePlaceReviews: {
         type: 'array',
         items: {
-          $ref: '#/components/schemas/PlaceReview',
+          $ref: '#/components/schemas/CoursePlaceReview',
         },
       },
-      PlaceReviewPicture: {
+      CoursePlaceReviewPicture: {
         type: 'object',
         properties: {
           id: {
@@ -326,10 +1114,10 @@
           },
         },
       },
-      PlaceReviewPictures: {
+      CoursePlaceReviewPictures: {
         type: 'array',
         items: {
-          $ref: '#/components/schemas/PlaceReviewPicture',
+          $ref: '#/components/schemas/CoursePlaceReviewPicture',
         },
       },
       AddCourseRequest: {
@@ -339,12 +1127,12 @@
             $ref: '#/components/schemas/Course',
           },
           reviews: {
-            $ref: '#/components/schemas/PlaceReviews',
+            $ref: '#/components/schemas/CoursePlaceReviews',
           },
           review_photos: {
             type: 'array',
             items: {
-              $ref: '#/components/schemas/PlaceReviewPictures',
+              $ref: '#/components/schemas/CoursePlaceReviewPictures',
             },
           },
         },
@@ -401,6 +1189,191 @@
           earned_rate: {
             type: 'number',
             format: 'double',
+          },
+        },
+      },
+      Place: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+          name: {
+            type: 'string',
+          },
+          address: {
+            type: 'string',
+          },
+          latitude: {
+            type: 'number',
+            format: 'double',
+          },
+          longitude: {
+            type: 'number',
+            format: 'double',
+          },
+          phone_number: {
+            type: 'string',
+          },
+          website: {
+            type: 'string',
+          },
+          rating: {
+            type: 'number',
+            format: 'double',
+          },
+          user_ratings_total: {
+            type: 'number',
+            format: 'int32',
+          },
+          price_level: {
+            type: 'number',
+            format: 'int8',
+          },
+          opening_hours: {
+            type: 'string',
+          },
+          icon: {
+            type: 'string',
+          },
+          icon_background_color: {
+            type: 'string',
+          },
+          icon_mask_base_uri: {
+            type: 'string',
+          },
+          photos: {
+            type: 'array',
+            items: {
+              $ref: '#/components/schemas/PlacePhoto',
+            },
+          },
+          reviews: {
+            type: 'array',
+            items: {
+              $ref: '#/components/schemas/PlaceReview',
+            },
+          },
+        },
+      },
+      PlacePhoto: {
+        type: 'object',
+        properties: {
+          photo_reference: {
+            type: 'string',
+          },
+          height: {
+            type: 'number',
+            format: 'int32',
+          },
+          width: {
+            type: 'number',
+            format: 'int32',
+          },
+          html_attributions: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+      },
+      PlaceReview: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+          place_id: {
+            type: 'string',
+          },
+          author_id: {
+            type: 'string',
+          },
+          author_name: {
+            type: 'string',
+          },
+          author_url: {
+            type: 'string',
+          },
+          language: {
+            type: 'string',
+          },
+          profile_photo_url: {
+            type: 'string',
+          },
+          rating: {
+            type: 'number',
+            format: 'double',
+          },
+          relative_time_description: {
+            type: 'string',
+          },
+          text: {
+            type: 'string',
+          },
+          time: {
+            type: 'string',
+            format: 'date-time',
+          },
+        },
+      },
+      Profile: {
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string',
+          },
+          nickname: {
+            type: 'string',
+          },
+          badge_id: {
+            type: 'string',
+          },
+          badge_image: {
+            type: 'string',
+          },
+          badge_summary: {
+            type: 'string',
+          },
+          favorite_place_count: {
+            type: 'number',
+            format: 'int32',
+          },
+          favorite_course_count: {
+            type: 'number',
+            format: 'int32',
+          },
+        },
+      },
+      Ranking: {
+        type: 'object',
+        properties: {
+          delta: {
+            type: 'number',
+            format: 'int32',
+          },
+          rank: {
+            type: 'number',
+            format: 'int32',
+          },
+          updated: {
+            type: 'string',
+            format: 'date-time',
+          },
+        },
+      },
+      SigninRequest: {
+        type: 'object',
+        properties: {
+          access_token: {
+            type: 'string',
+          },
+          kakao_account: {
+            type: 'boolean',
+          },
+          naver_account: {
+            type: 'boolean',
           },
         },
       },
