@@ -34,13 +34,9 @@ export async function GetPlace(request: HttpRequest, context: InvocationContext)
         }
     });
 
-    const result = {
-        place: resp,
-    }
-
     return {
         status: 200,
-        body: JSON.stringify(result)
+        body: JSON.stringify(resp)
     }
 };
 
