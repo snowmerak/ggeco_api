@@ -31,7 +31,7 @@ export async function Signout(request: HttpRequest, context: InvocationContext):
 };
 
 app.http('Signout', {
-    methods: ['PATCH'],
+    methods: ['DELETE'],
     authLevel: 'function',
     handler: Signout
 });
