@@ -39,7 +39,7 @@ export async function RemoveFavoriteCourse(request: HttpRequest, context: Invoca
 };
 
 app.http('RemoveFavoriteCourse', {
-    methods: ['GET', 'POST'],
-    authLevel: 'anonymous',
+    methods: ['DELETE'],
+    authLevel: 'function',
     handler: RemoveFavoriteCourse
 });
