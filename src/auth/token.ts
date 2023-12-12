@@ -21,12 +21,18 @@ export class Payload {
 
 export function generateAccessToken(payload: Payload): string {
     payload.type = TokenType.ACCESS_TOKEN;
-    return jwt.sign(payload, secret_key, { expiresIn: access_token_lifetime });
+    return jwt.sign({
+        type: payload.type,
+        id: payload.id
+    }, secret_key, { expiresIn: access_token_lifetime });
 }
 
 export function generateRefreshToken(payload: Payload): string {
     payload.type = TokenType.REFRESH_TOKEN;
-    return jwt.sign(payload, secret_key, { expiresIn: refresh_token_lifetime });
+    return jwt.sign({
+        type: payload.type,
+        id: payload.id
+    }, secret_key, { expiresIn: refresh_token_lifetime });
 }
 
 export function verifyAccessToken(token: string): Payload {
